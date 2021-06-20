@@ -1,6 +1,7 @@
 module.exports = {
 	name: 'nowplaying',
 	description: 'Now playing command.',
+	aliases: ['np', 'now'],
 	cooldown: 1,
 	execute(message) {
 		const serverQueue = message.client.queue.get(message.guild.id);

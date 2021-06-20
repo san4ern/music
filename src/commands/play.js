@@ -10,6 +10,7 @@ module.exports = {
 	name: 'play',
 	description: 'Play command.',
 	usage: '[command name]',
+	aliases: [ 'p' ],
 	args: false,
 	cooldown: 3,
 	async execute(message, args) {

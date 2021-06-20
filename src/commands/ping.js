@@ -1,6 +1,7 @@
 module.exports = {
-    name: 'ping',
+    name: 'botstats',
     description: 'Average bot ping.',
+    aliases: [ 'stats', 'ping', 'bs' ],
     cooldown: 1,
     async execute(message, args) {
         function average(nums) {

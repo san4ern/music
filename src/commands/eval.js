@@ -1,6 +1,7 @@
 module.exports = {
     name: 'eval',
     description: 'Eval.',
+    aliases: ['e'],
     cooldown: 1,
     secret: true,
     async execute(message, args) {
