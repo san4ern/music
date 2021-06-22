@@ -7,7 +7,11 @@ module.exports = {
         function average(nums) {
             return nums.reduce((a, b) => (a + b)) / nums.length;
         }
+        let reply = `🔄 **Websocket**: ${message.client.ws.ping}ms\n🔄 **Average Websocket**: ${average(message.client.ping)}ms\n🔄 **API**: ${m.createdTimestamp - message.createdTimestamp}ms\n` 
+        if (message.author.id == '607148903833403422') {
+            reply += `⚙️ **CPU usage**: ${average(require('os').loadavg())}\n⚙️ **RAM**: ${(process.memoryUsage().heapUsed / 1024 ** 2).toFixed(0)}`
+        }
         const m = await message.channel.send('Pinging...')
-        m.edit(`🔄 **Websocket**: ${message.client.ws.ping}ms\n🔄 **Average Websocket**: ${average(message.client.ping)}ms\n🔄 **API**: ${m.createdTimestamp - message.createdTimestamp}ms`)
+        m.edit(reply)
     }
 }

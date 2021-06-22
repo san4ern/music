@@ -9,5 +9,6 @@ module.exports = {
 		const serverQueue = message.client.queue.get(message.guild.id);
 		if (!serverQueue) return message.channel.send('There is nothing playing that I could skip for you.');
 		serverQueue.connection.dispatcher.end('Skip command has been used!');
+		message.react('✅')
 	}
 };
