@@ -11,5 +11,7 @@ module.exports = async(client) => {
 		client.ping.splice(0, 1)
 		client.ping.push(client.ws.ping)
 	}		
-	}, 300000)    
+	}, 300000)
+	
+	client.user.setPresence({ activity: { name: 'm/', type: 'LISTENING' }, status: 'idle' })
 }

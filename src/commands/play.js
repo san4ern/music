@@ -34,17 +34,37 @@ module.exports = {
 		if (!permissions.has('SPEAK')) return message.channel.send('I cannot speak in this voice channel, make sure I have the proper permissions!');
 
 		let song = await search(args.join(' ').replace(/<(.+)>/g, '$1'), opts, async function(err, results) {
-		  if(err) return console.log(err);
+			let result = results
+		if(!result) {
+			
+		let idregex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/gi; 
+		let idreg = idregex.exec(args[0])
+			if(!idreg) {
+				return message.channel.send('❌ I couldn\'t find song for specific query! Try another')
+			}
+		let id = idreg[1]
+		let song = await require('node-fetch')('https://www.googleapis.com/youtube/v3/videos?part=snippet&id=' + id + '&key=' + process.env.YOUTUBE_TOKEN).then(r => r.json())
+		try {
+			let result = [{
+			id: song.items[0].id,
+			title: song.items[0].snippet.title,
+			link: 'https://www.youtube.com/watch?v=' + song.items[0].id
+		}]
+	} catch {
+		return message.channel.send('❌ I couldn\'t find song for specific query! Try another')
+	}
+		
+		} 
+			if(err) return console.log(err);
 		  let song = {
-				id: results[0].id,
-				title: Util.escapeMarkdown(results[0].title),
-				url: results[0].link
+				id: result[0].id,
+				title: Util.escapeMarkdown(result[0].title),
+				url: result[0].link
 			};
 		const serverQueue = message.client.queue.get(message.guild.id);
 		
 		if (serverQueue) {
 			serverQueue.songs.push(song);
-			console.log(serverQueue.songs);
 			return message.channel.send(`✅ **${song.title}** has been added to the queue!`);
 		}
 
@@ -67,7 +87,7 @@ module.exports = {
 				return;
 			}
 
-			const dispatcher = queue.connection.play(ytdl(song.url))
+			const dispatcher = queue.connection.play(ytdl(song.url, { quality: 'highestaudio' }), { bitrate: 'auto' })
 				.on('finish', () => {
 					queue.songs.shift();
 					play(queue.songs[0]);
