@@ -87,7 +87,7 @@ module.exports = {
 				return;
 			}
 
-			const dispatcher = queue.connection.play(ytdl(song.url, { quality: 'highestaudio' }), { bitrate: 'auto' })
+			const dispatcher = queue.connection.play(ytdl(song.url), { bitrate: 'auto' })
 				.on('finish', () => {
 					queue.songs.shift();
 					play(queue.songs[0]);
