@@ -99,6 +99,7 @@ module.exports = {
 
 		try {
 			const connection = await channel.join();
+			message.guild.me.voice.setSelfDeaf(true)
 			queueConstruct.connection = connection;
 			play(queueConstruct.songs[0]);
 		} catch (error) {
