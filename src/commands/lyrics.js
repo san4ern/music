@@ -34,7 +34,7 @@ module.exports = {
                 }
             })
             collector.on('end', () => {
-            if(message.guild.me.permissions.has('MANAGE_MESSAGES')){
+            if(message.channel.permissionsFor(message.guild.me).has('MANAGE_MESSAGES')){
                 m.reactions.removeAll()
             }})
                 }
