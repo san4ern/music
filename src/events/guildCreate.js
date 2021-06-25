@@ -1,4 +1,4 @@
-module.exports = async(guild) => {
+module.exports = async(client, guild) => {
     const monguild = await mongo.guilds.findOne({
         guildID: guild.id
     })   
