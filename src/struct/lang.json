@@ -53,6 +53,10 @@
             "noPerms": "❌ У тебя недостаточно прав на выполнение этой команды. Тебе необходимо право Управлять сервером",
             "changed": "✅ Язык был успешно изменён на Русский"
         },
+        "prefix": {
+            "noPerms": "❌ У тебя недостаточно прав на выполнение этой команды. Тебе необходимо право Управлять сервером",
+            "changed": "✅ Префикс был успешно изменён на **%prefix%**"
+        },
 
         "global": {
             "noArgs": "Ты не указал выражение, %author%",
@@ -112,8 +116,12 @@
             "error": "❌ I could not join the voice channel: %error%"            
         },
         "language": {
-            "noPerms": "❌  You need Manage Guild permission to perform this command. ",
+            "noPerms": "❌ You need Manage Guild permission to perform this command. ",
             "changed": "✅ Language was successfully changed to English"
+        },
+        "prefix": {
+            "noPerms": "❌ You need Manage Guild permission to perform this command. ",
+            "changed": "✅ Prefix was successfully changed to **%prefix%**"
         },
 
         "global": {

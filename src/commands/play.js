@@ -17,6 +17,7 @@ module.exports = {
 	args: false,
 	cooldown: 3,
 	async execute(message, args) {
+		const prefix = client.cache.get(message.guild.id).prefix || client.config.prefix
 			if(!args[0]) {
 				const serverQueue = message.client.queue.get(message.guild.id);
 				if (serverQueue && !serverQueue.playing) {
@@ -25,7 +26,7 @@ module.exports = {
 					return message.channel.send('▶ Resumed the music for you!');
 				} else {
 					let reply = client.lang[client.cache.get(message.guild.id).lang]['global'].noArgs.replace('%author%', message.author);
-		if (this.usage) reply += client.lang[client.cache.get(message.guild.id).lang]['global'].usage.replace('%usage%',`\`${client.config.prefix}${this.name} ${this.usage}\``);
+		if (this.usage) reply += client.lang[client.cache.get(message.guild.id).lang]['global'].usage.replace('%usage%',`\`${prefix}${this.name} ${this.usage}\``);
 					return message.channel.send(reply);	
 				}
 

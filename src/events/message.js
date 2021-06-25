@@ -1,8 +1,9 @@
 
 const { Collection } = require('discord.js');
 module.exports = async(client, message) => {
-    if (!message.content.startsWith(client.config.prefix) || message.author.bot) return;
-	const args = message.content.slice(client.config.prefix.length).split(/ +/);
+	const prefix = client.cache.get(message.guild.id).prefix || client.config.prefix
+    if (!message.content.startsWith(prefix) || message.author.bot) return;
+	const args = message.content.slice(prefix.length).split(/ +/);
 	const commandName = args.shift().toLowerCase();
 	const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 	if (!command) return;
@@ -10,7 +11,7 @@ module.exports = async(client, message) => {
 	if (message.channel.type !== 'text') return 
 	if (command.args && !args.length) {
 		let reply = client.lang[client.cache.get(message.guild.id).lang]['global'].noArgs.replace('%author%', message.author);
-		if (command.usage) reply += client.lang[client.cache.get(message.guild.id).lang]['global'].usage.replace('%usage%',`\`${client.config.prefix}${command.name} ${command.usage}\``);
+		if (command.usage) reply += client.lang[client.cache.get(message.guild.id).lang]['global'].usage.replace('%usage%',`\`${prefix}${command.name} ${command.usage}\``);
 		return message.channel.send(reply);
 	}
 	if (!client.cooldowns.has(command.name)) {

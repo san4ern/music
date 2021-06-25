@@ -12,8 +12,16 @@ module.exports = {
     usage: '[song name]',
 	cooldown: 3,
     async execute(message, args) {
+        const prefix = client.cache.get(message.guild.id).prefix || client.config.prefix
+        let query = args.join(' ')
+            if(!args.length && message.client.queue.get(message.guild.id).songs.length) {
+                query = message.client.queue.get(message.guild.id).songs[0].title
+            } else {
+                let reply = client.lang[client.cache.get(message.guild.id).lang]['global'].noArgs.replace('%author%', message.author);
+                if (this.usage) reply += client.lang[client.cache.get(message.guild.id).lang]['global'].usage.replace('%usage%',`\`${prefix}${this.name} ${this.usage}\``);                
+            }
         try {
-            const search = await lyrics.songs.search(args.join(' '))
+            const search = await lyrics.songs.search(query)
         const found = search[0]
 
         const text = await found.lyrics()
