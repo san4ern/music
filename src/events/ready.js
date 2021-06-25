@@ -14,7 +14,7 @@ module.exports = async(client) => {
 			}
 			client.cache.put(guild, json)
 		}
-	}, 3000)
+	}, 10000)
 
 	setInterval(() => {
 	if(client.ping.length != 5) {
