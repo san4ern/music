@@ -67,7 +67,7 @@
     },
     "eng": {
         "help": {
-            "list": "**List of commands**"
+            "list": "**List of commands**\n"
         },
         "lyrics": {
             "name": "**💬 %name%'s lyrics**:\n",
