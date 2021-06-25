@@ -18,7 +18,8 @@ module.exports = {
                 query = message.client.queue.get(message.guild.id).songs[0].title
             } else {
                 let reply = client.lang[client.cache.get(message.guild.id).lang]['global'].noArgs.replace('%author%', message.author);
-                if (this.usage) reply += client.lang[client.cache.get(message.guild.id).lang]['global'].usage.replace('%usage%',`\`${prefix}${this.name} ${this.usage}\``);                
+                if (this.usage) reply += client.lang[client.cache.get(message.guild.id).lang]['global'].usage.replace('%usage%',`\`${prefix}${this.name} ${this.usage}\``); 
+                return message.channel.send(reply)               
             }
         try {
             const search = await lyrics.songs.search(query)
