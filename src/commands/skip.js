@@ -1,13 +1,16 @@
 module.exports = {
 	name: 'skip',
-	description: 'Skip command.',
+	description: {
+		'ru': 'Пропустить песню, которая сейчас играет.',
+		'eng': 'Skip command.'
+	},
 	aliases: [ 's' ],
 	cooldown: 1,
 	execute(message) {
 		const { channel } = message.member.voice;
-		if (!channel) return message.channel.send('I\'m sorry but you need to be in a voice channel to play music!');
+		if (!channel) return message.channel.send(client.lang[client.cache.get(message.guild.id).lang][this.name].voice);
 		const serverQueue = message.client.queue.get(message.guild.id);
-		if (!serverQueue) return message.channel.send('There is nothing playing that I could skip for you.');
+		if (!serverQueue) return message.channel.send(client.lang[client.cache.get(message.guild.id).lang][this.name].nothing);
 		serverQueue.connection.dispatcher.end('Skip command has been used!');
 		message.react('✅')
 	}

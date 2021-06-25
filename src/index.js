@@ -19,5 +19,6 @@ readdirSync(join(__dirname, "events"))
             client.on(eventName, event.bind(null, client));
             delete require.cache[require.resolve(`../src/events/${file}`)];
         });
-
+        
+require('./struct/mongo.js')(client)
 client.login(client.config.token);

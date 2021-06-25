@@ -3,8 +3,13 @@ const lyrics = new Genius.Client(process.env.LYRICS_KEY);
 
 module.exports = {
     name: 'lyrics',
-    description: 'Lyrics-search command.',
+    description: {
+        'ru': 'Команда, которая позволяет найти текст указанной песни.',
+        'eng': 'Lyrics-search command.'
+    },
 	aliases: ['l', 'text'],
+    args: true,
+    usage: '[song name]',
 	cooldown: 3,
     async execute(message, args) {
         try {
@@ -16,7 +21,7 @@ module.exports = {
         const pattern = new RegExp(".{1," + length + "}", "g");
         let res = text.match(/(.|[\r\n]){1,1900}/g);
         let i = 1
-        const msg = `**💬 ${found.title}'s lyrics**:\n${res[0]}`
+        const msg = client.lang[client.cache.get(message.guild.id).lang][this.name].name.replace('%name%', found.title) + res[0]
         const responce = await message.channel.send(msg)
             .then(m => {
                 if(res.length > 1) {
@@ -28,7 +33,7 @@ module.exports = {
             collector.on('collect', (reaction, user) => {
                 console.log(reaction)
                 if(reaction.emoji.name == '➡️') {
-                    m.edit(`**💬 ${found.title}'s lyrics**:\n${res[i]}`)
+                    m.edit(client.lang[client.cache.get(message.guild.id).lang][this.name].name.replace('%name%', found.title) + res[i])
                     i++
                     
                 }
@@ -43,7 +48,7 @@ module.exports = {
 
 
         } catch {
-        message.channel.send('❌ No lyrics was found by specified query. Try another one')
+        message.channel.send(client.lang[client.cache.get(message.guild.id).lang][this.name].error)
         }
     }
 }

@@ -8,8 +8,11 @@ let opts = {
 };
 module.exports = {
 	name: 'play',
-	description: 'Play command.',
-	usage: '[command name]',
+	description: {
+		'ru': 'Команда, которая поставит на проигрывание песню.',
+		'eng': 'Play command.'
+	},
+	usage: '[music name]',
 	aliases: [ 'p' ],
 	args: false,
 	cooldown: 3,
@@ -21,17 +24,17 @@ module.exports = {
 					serverQueue.connection.dispatcher.resume();
 					return message.channel.send('▶ Resumed the music for you!');
 				} else {
-					let reply = `You didn't provide any arguments, ${message.author}!`;
-					if (this.usage) reply += `\nThe proper usage would be: \`${message.client.config.prefix}${this.name} ${this.usage}\``;
+					let reply = client.lang[client.cache.get(message.guild.id).lang]['global'].noArgs.replace('%author%', message.author);
+		if (this.usage) reply += client.lang[client.cache.get(message.guild.id).lang]['global'].usage.replace('%usage%',`\`${client.config.prefix}${this.name} ${this.usage}\``);
 					return message.channel.send(reply);	
 				}
 
 			}
 		const { channel } = message.member.voice;
-		if (!channel) return message.channel.send('I\'m sorry but you need to be in a voice channel to play music!');
+		if (!channel) return message.channel.send(client.lang[client.cache.get(message.guild.id).lang][this.name].voice);
 		const permissions = channel.permissionsFor(message.client.user);
-		if (!permissions.has('CONNECT')) return message.channel.send('I cannot connect to your voice channel, make sure I have the proper permissions!');
-		if (!permissions.has('SPEAK')) return message.channel.send('I cannot speak in this voice channel, make sure I have the proper permissions!');
+		if (!permissions.has('CONNECT')) return message.channel.send(client.lang[client.cache.get(message.guild.id).lang][this.name].noPermsJoin);
+		if (!permissions.has('SPEAK')) return message.channel.send(client.lang[client.cache.get(message.guild.id).lang][this.name].noPermsSpeak);
 
 		let song = await search(args.join(' ').replace(/<(.+)>/g, '$1'), opts, async function(err, results) {
 			let result = results
@@ -40,7 +43,7 @@ module.exports = {
 		let idregex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/gi; 
 		let idreg = idregex.exec(args[0])
 			if(!idreg) {
-				return message.channel.send('❌ I couldn\'t find song for specific query! Try another')
+				return message.channel.send(client.lang[client.cache.get(message.guild.id).lang][this.name].noSong)
 			}
 		let id = idreg[1]
 		let song = await require('node-fetch')('https://www.googleapis.com/youtube/v3/videos?part=snippet&id=' + id + '&key=' + process.env.YOUTUBE_TOKEN).then(r => r.json())
@@ -51,7 +54,7 @@ module.exports = {
 			link: 'https://www.youtube.com/watch?v=' + song.items[0].id
 		}]
 	} catch {
-		return message.channel.send('❌ I couldn\'t find song for specific query! Try another')
+		return message.channel.send(client.lang[client.cache.get(message.guild.id).lang][this.name].noSong)
 	}
 		
 		} 
@@ -65,7 +68,7 @@ module.exports = {
 		
 		if (serverQueue) {
 			serverQueue.songs.push(song);
-			return message.channel.send(`✅ **${song.title}** has been added to the queue!`);
+			return message.channel.send(client.lang[client.cache.get(message.guild.id).lang][this.name].addSong.replace('%song%', song.title));
 		}
 
 		const queueConstruct = {
@@ -73,7 +76,7 @@ module.exports = {
 			voiceChannel: channel,
 			connection: null,
 			songs: [],
-			volume: 2,
+			volume: 1,
 			playing: true
 		};
 		message.client.queue.set(message.guild.id, queueConstruct);
@@ -94,7 +97,7 @@ module.exports = {
 				})
 				.on('error', error => console.error(error));
 			dispatcher.setVolumeLogarithmic(queue.volume / 5);
-			queue.textChannel.send(`🎶 Start playing: **${song.title}**`);
+			queue.textChannel.send(client.lang[client.cache.get(message.guild.id).lang]['play'].newSong.replace('%song%', song.title));
 		};
 
 		try {
@@ -106,7 +109,7 @@ module.exports = {
 			console.error(`I could not join the voice channel: ${error}`);
 			message.client.queue.delete(message.guild.id);
 			await channel.leave();
-			return message.channel.send(`I could not join the voice channel: ${error}`);
+			return message.channel.send(client.lang[client.cache.get(message.guild.id).lang][this.name].error.replace('%error%', error));
 		}
 		});
 		
