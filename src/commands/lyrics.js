@@ -8,13 +8,13 @@ module.exports = {
         'eng': 'Lyrics-search command.'
     },
 	aliases: ['l', 'text'],
-    args: true,
+    args: false,
     usage: '[song name]',
 	cooldown: 3,
     async execute(message, args) {
         const prefix = client.cache.get(message.guild.id).prefix || client.config.prefix
         let query = args.join(' ')
-            if(!args.length && message.client.queue.get(message.guild.id).songs.length) {
+            if(!args.length && message.client.queue.get(message.guild.id)) {
                 query = message.client.queue.get(message.guild.id).songs[0].title
             } else {
                 let reply = client.lang[client.cache.get(message.guild.id).lang]['global'].noArgs.replace('%author%', message.author);
