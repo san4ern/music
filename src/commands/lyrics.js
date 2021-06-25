@@ -16,7 +16,7 @@ module.exports = {
         let query = args.join(' ')
             if(!args.length && message.client.queue.get(message.guild.id)) {
                 query = message.client.queue.get(message.guild.id).songs[0].title
-            } else {
+            } else if(!args.length) {
                 let reply = client.lang[client.cache.get(message.guild.id).lang]['global'].noArgs.replace('%author%', message.author);
                 if (this.usage) reply += client.lang[client.cache.get(message.guild.id).lang]['global'].usage.replace('%usage%',`\`${prefix}${this.name} ${this.usage}\``); 
                 return message.channel.send(reply)               
