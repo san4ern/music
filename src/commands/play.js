@@ -7,6 +7,7 @@ let opts = {
   type: 'video'
 };
 module.exports = {
+	default: {
 	name: 'play',
 	description: {
 		'ru': 'Команда, которая поставит на проигрывание песню.',
@@ -113,6 +114,28 @@ module.exports = {
 			return message.channel.send(client.lang[client.cache.get(message.guild.id).lang][this.name].error.replace('%error%', error));
 		}
 		});
-		
 	}
+	},
+	slash: {
+		"name": "play",
+		"description": "Play command",
+		"options": [
+			{
+			  "type": 3,
+			  "name": "song",
+			  "description": "Song name or URL",
+			  "required": true
+			}
+		  ],
+		execute(client, interaction, args) {
+			client.api.interactions(interaction.id, interaction.token).callback.post({
+				data: {
+					type: 4,
+					data: {
+						content: `Args: ${args[0].value}`
+					}
+				}
+			})
+		}
+	  }
 };

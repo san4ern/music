@@ -1,4 +1,5 @@
 module.exports = {
+    default: {
     name: 'help',
     description: {
         'ru': 'Команда, выводящая список команд.',
@@ -10,5 +11,6 @@ module.exports = {
         const { commands } = message.client
         const msg = client.lang[client.cache.get(message.guild.id).lang][this.name].list + commands.filter(x => !x.secret).map(x => `**${x.name}** - ${x.description[client.cache.get(message.guild.id).lang]}\n`).join('')
         message.channel.send(msg)        
+    }
     }
 }

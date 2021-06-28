@@ -1,4 +1,5 @@
 module.exports = {
+	default: {
 	name: 'stop',
 	description: {
 		'ru': 'Команда, отключающая воспроизведение песен.',
@@ -15,4 +16,5 @@ module.exports = {
 		serverQueue.connection.dispatcher.end('Stop command has been used!');
 		message.react('✅')
 	}
+}
 };

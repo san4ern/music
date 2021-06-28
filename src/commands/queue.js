@@ -1,4 +1,5 @@
 module.exports = {
+	default: {
 	name: 'queue',
 	description: {
 		'ru': 'Очередь проигрывания сервера.',
@@ -13,5 +14,6 @@ module.exports = {
 				.replace('%songs%', serverQueue.songs.slice(0, 10).map(song => `**-** ${song.title}`).join('\n'))
 				.replace('%now%', serverQueue.songs[0].title)
 		);
+	}
 	}
 };

@@ -1,4 +1,5 @@
 module.exports = {
+	default: {
 	name: 'resume',
 	description: {
 		'ru': 'Возобновление воспроизведения песен.',
@@ -15,5 +16,6 @@ module.exports = {
 			return message.channel.send(client.lang[client.cache.get(message.guild.id).lang][this.name].resumed);
 		}
 		return message.channel.send(client.lang[client.cache.get(message.guild.id).lang][this.name].nothing);
+	}
 	}
 };

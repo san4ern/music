@@ -6,10 +6,11 @@ const { MessageEmbed } = require('discord.js');
 global.embed = MessageEmbed
 global.client = new MusicClient({ token: process.env.DISCORD_TOKEN, prefix: process.env.DISCORD_PREFIX });
 
+require('./struct/slashCommands').slash(client)
 const commandFiles = readdirSync(join(__dirname, 'commands')).filter(file => file.endsWith('.js'));
 for (const file of commandFiles) {
 	const command = require(join(__dirname, 'commands', `${file}`));
-	client.commands.set(command.name, command);
+	client.commands.set(command.default.name, command.default);
 }
 readdirSync(join(__dirname, "events"))
         .filter(file => file.endsWith(".js"))
@@ -21,4 +22,6 @@ readdirSync(join(__dirname, "events"))
         });
         
 require('./struct/mongo.js')(client)
+
+     
 client.login(client.config.token);

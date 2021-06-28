@@ -1,7 +1,11 @@
 
 const { Collection } = require('discord.js');
 module.exports = async(client, message) => {
-	const prefix = client.cache.get(message.guild.id).prefix || client.config.prefix
+	try {
+		global.prefix = client.cache.get(message.guild.id).prefix
+	} catch {
+		global.prefix = client.config.prefix
+	}
     if (!message.content.startsWith(prefix) || message.author.bot) return;
 	const args = message.content.slice(prefix.length).split(/ +/);
 	const commandName = args.shift().toLowerCase();

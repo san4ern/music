@@ -1,4 +1,5 @@
 module.exports = {
+	default: {
 	name: 'volume',
 	description: {
 		'ru': 'Команда, которая позволит изменить громкость песни',
@@ -18,4 +19,5 @@ module.exports = {
 		serverQueue.connection.dispatcher.setVolumeLogarithmic(args[0] / 5);
 		return message.channel.send(client.lang[client.cache.get(message.guild.id).lang][this.name].success.replace('%new%', args[0]));
 	}
+}
 };

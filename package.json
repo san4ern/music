@@ -12,9 +12,11 @@
 	"dependencies": {
 		"discord.js": "^12.5.3",
 		"dotenv": "^8.6.0",
+		"ffmpeg-static": "^4.4.0",
 		"genius-lyrics": "^4.2.9",
 		"memory-cache": "^0.2.0",
 		"mongodb": "^3.6.9",
+		"slash-commands": "^1.4.0",
 		"youtube-search": "^1.1.6",
 		"ytdl-core": "git://github.com/fent/node-ytdl-core.git#d1f535712410eebd79a7468abd07d94f8c4ebe5a"
 	},

@@ -1,4 +1,5 @@
 module.exports = {
+	default: {
 	name: 'skip',
 	description: {
 		'ru': 'Пропустить песню, которая сейчас играет.',
@@ -13,5 +14,6 @@ module.exports = {
 		if (!serverQueue) return message.channel.send(client.lang[client.cache.get(message.guild.id).lang][this.name].nothing);
 		serverQueue.connection.dispatcher.end('Skip command has been used!');
 		message.react('✅')
+	}
 	}
 };

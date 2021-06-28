@@ -1,4 +1,5 @@
 module.exports = {
+    default: {
     name: 'language',
     description: {
         'ru': 'Команда для смены языка интерфейса.',
@@ -38,4 +39,5 @@ module.exports = {
     message.channel.send(client.lang[client.cache.get(message.guild.id).lang][this.name].changed)            
         }                
     }
+    }   
 }

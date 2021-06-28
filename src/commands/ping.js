@@ -1,4 +1,5 @@
 module.exports = {
+    default: {
     name: 'botstats',
     description: {
         'ru': 'Краткая статистика бота.',
@@ -18,5 +19,6 @@ module.exports = {
         reply += `⚙️ **CPU usage**: ${(average(require('os').loadavg())).toFixed(0)}%\n⚙️ **RAM**: ${(process.memoryUsage().heapUsed / 1024 ** 2).toFixed(0)}MB`
     }
     m.edit(reply)
+    }
     }
 }

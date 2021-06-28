@@ -1,4 +1,5 @@
 module.exports = {
+	default: {
 	name: 'pause',
 	description: {
 		'ru': 'Команда, которая приостанавливает воспроизведение музыки.',
@@ -15,5 +16,6 @@ module.exports = {
 			return message.channel.send(client.lang[client.cache.get(message.guild.id).lang][this.name].paused);
 		}
 		return message.channel.send(client.lang[client.cache.get(message.guild.id).lang][this.name].nothing);
+	}
 	}
 };

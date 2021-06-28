@@ -1,4 +1,5 @@
 module.exports = {
+  default: {
     name: 'eval',
     description: 'Eval.',
     aliases: ['e'],
@@ -28,4 +29,5 @@ module.exports = {
       
       }
         }
+  }
 }

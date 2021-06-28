@@ -1,4 +1,5 @@
 module.exports = {
+    default: {
     name: 'prefix',
     description: {
         'ru': 'Команда для смены префикса.',
@@ -23,6 +24,6 @@ module.exports = {
             json.prefix = args[0]
         client.cache.put(message.guild.id, json)
     message.channel.send(client.lang[client.cache.get(message.guild.id).lang][this.name].changed.replace('%prefix%', args[0]))
-        
+        }   
     }
 }
