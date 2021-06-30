@@ -119,28 +119,6 @@ module.exports = {
                 }
             }
         })
-            .then(m => {
-                if(res.length > 1) {
-                    m.react('➡️')
-                    const filter = (reaction, user) => {
-                        return ['➡️'].includes(reaction.emoji.name) && user.id === message.author.id;
-                    };
-            const collector = m.createReactionCollector(filter, { max: res.length - 1, time: 15000 });
-            collector.on('collect', (reaction, user) => {
-                console.log(reaction)
-                if(reaction.emoji.name == '➡️') {
-                    m.edit(client.lang[client.cache.get(interaction.guild_id).lang][this.name].name.replace('%name%', found.title) + res[i])
-                    i++
-                    
-                }
-            })
-            collector.on('end', () => {
-            if(message.channel.permissionsFor(client.user.id).has('MANAGE_MESSAGES')){
-                m.reactions.removeAll()
-            }})
-                }
-                
-        })
 
 
         } catch {
@@ -148,6 +126,7 @@ module.exports = {
 				data: {
 					type: 4,
 					data: {
+                        flags: 64,
 						content: client.lang[client.cache.get(interaction.guild_id).lang][this.name].error
 					}
 				}

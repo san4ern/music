@@ -132,6 +132,7 @@ module.exports = {
 				data: {
 					type: 4,
 					data: {
+						flags: 64,
 						content: `Args: ${args[0].value}`
 					}
 				}
