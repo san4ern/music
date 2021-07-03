@@ -83,6 +83,7 @@ module.exports = {
                     data: {
                         type: 4,
                         data: {
+                            flags: 64,
                             content: reply
                         }
                     }
@@ -98,6 +99,7 @@ module.exports = {
                     data: {
                         type: 4,
                         data: {
+                            flags: 64,
                             content: reply
                         }
                     }

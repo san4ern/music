@@ -19,5 +19,20 @@ module.exports = {
 		serverQueue.connection.dispatcher.setVolumeLogarithmic(args[0] / 5);
 		return message.channel.send(client.lang[client.cache.get(message.guild.id).lang][this.name].success.replace('%new%', args[0]));
 	}
-}
+},
+	slash: {
+		"name": "volume",
+		"description": "Change current playback's volume",
+		"options": [
+		  {
+			"type": 4,
+			"name": "volume",
+			"description": "New volume",
+			"required": true
+		  }
+		],
+		async execute(client, interaction, args) {
+			console.log(args)
+		}
+	  }	
 };

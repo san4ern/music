@@ -1,6 +1,7 @@
 const { DiscordInteractions } = require("slash-commands");
 const { readdirSync } = require('fs');
 const { join } = require('path');
+const { sleep } = require('sleep')
 module.exports = {
     async slash(client) {
         global.interaction = new DiscordInteractions({
@@ -11,15 +12,17 @@ module.exports = {
 const commandFiles = readdirSync('./src/commands').filter(file => file.endsWith('.js'));
 for (const file of commandFiles) {
     
-        const cmd = require(`../commands/${file}`);
-    if(cmd.slash) {
-        client.slashCommands.set(cmd.slash.name, cmd.slash);
-            await interaction
-            .createApplicationCommand(cmd.slash)
-            .then(console.log)
-            .catch(console.error.errors);
+    const command = require(`../commands/${file}`);
+
+    if(command.slash) {
+    client.slashCommands.set(command.slash.name, command.slash);
+        await interaction
+        .createApplicationCommand(command.slash)
+        .then(console.log)
+        .catch(console.error.errors);
+        sleep(3)
     }
-	
+    
 	
 }
           client.ws.on('INTERACTION_CREATE', async interaction => {
