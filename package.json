@@ -1,40 +1,28 @@
 {
-        "name": "music-bot",
-        "version": "0.1.0",
-        "description": "Very simple discord music bot with the discordjs.guide command handler for easy learning and adapting.",
-        "main": "src/index.js",
-        "author": "MrSmooK <mrsmook.dev@gmail.com>",
-        "license": "MIT",
-        "private": true,
-        "scripts": {
-                "start": "node ."
-        },
-        "dependencies": {
-                "discord.js": "^12.5.3",
-                "dotenv": "^8.6.0",
-                "ffmpeg-static": "^4.4.0",
-                "genius-lyrics": "^4.2.9",
-                "memory-cache": "^0.2.0",
-                "mongodb": "^3.6.9",
-                "slash-commands": "^1.4.0",
-                "youtube-search": "^1.1.6",
-                "ytdl-core": "git://github.com/fent/node-ytdl-core.git#d1f535712410eebd79a7468abd07d94f8c4ebe5a"
-        },
-        "devDependencies": {
-                "eslint": "^7.29.0",
-                "eslint-config-aqua": "^7.3.0"
-        },
-        "optionalDependencies": {
-                "@discordjs/opus": "^0.3.2",
-                "erlpack": "github:discord/erlpack",
-                "zlib-sync": "^0.1.7"
-        },
-        "eslintConfig": {
-                "extends": "aqua/node"
-        },
-        "renovate": {
-                "extends": [
-                        "teal"
-                ]
-        }
+  "name": "music",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/san4ern/music.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/san4ern/music/issues"
+  },
+  "homepage": "https://github.com/san4ern/music#readme",
+  "dependencies": {
+    "@discordjs/builders": "^0.6.0",
+    "@discordjs/rest": "^0.1.0-canary.0",
+    "discord-api-types": "^0.23.1",
+    "discord.js": "^13.1.0",
+    "dotenv": "^10.0.0",
+    "shoukaku": "^2.0.4",
+    "spotify-url-info": "^2.2.3"
+  }
 }
