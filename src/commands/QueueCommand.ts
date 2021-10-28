@@ -33,7 +33,7 @@ export default class QueueCommand extends Command {
 
         let queueStr = '', i = 1;
         for(const track of queue.tracks) {
-            queueStr += `[\`#${i}\`] **${track.info.author}** - ${track.info.title}. \`(${dhm(track.info.length ?? 0)})\``;
+            queueStr += `[\`#${i}\`] **${track.info.author}** - ${track.info.title}. \`(${dhm(track.info.length ?? 0)})\`\n`;
             i++;
         }
 

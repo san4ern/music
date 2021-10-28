@@ -22,7 +22,7 @@ export default class PlayCommand extends Command {
 
     async execute(client: MusicBot, interaction: CommandInteraction) {
         // @ts-ignore
-        if(!interaction.member || !interaction.member?.voice.channel) {
+        if(!interaction.member || !interaction.member.voice || !interaction.member?.voice.channel) {
             return interaction.reply({ content: 'Ты не в голосовом канале!' })
         }
         let input = interaction.options.get('query') || { value: '' }, search = 'youtube';

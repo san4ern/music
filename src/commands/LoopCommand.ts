@@ -28,9 +28,11 @@ export default class LoopCommand extends Command {
         const queue = client.music.queue.get(interaction.guildId);
 
         if(!queue) return interaction.reply({ content: 'Очередь и без того пуста - мне нечего повторять!', ephemeral: true });
-
+        // @ts-ignore
+        if(!interaction.member.voice.channel || !interaction.member.voice.channel.id === queue.vc.id)
+            return interaction.reply({ content: `Ты не в голосовом канале, либо тот канал, в котором ты находишься не является ключевым для проигрывания`, ephemeral: true });
         const type = interaction.options.getString('type') || 'track';
-        const status = interaction.options.getBoolean('status') || !queue?.loop.status;
+        const status = interaction.options.getBoolean('status') ?? !queue?.loop.status;
         queue.loop.type = type; queue.loop.status = status;
 
         return interaction.reply({ content: `Было ${queue.loop.status ? 'запущено' : 'отключено'} повторное проигрывание ${queue.loop.type === 'track' ? 'трека' : 'очереди'}` });

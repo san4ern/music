@@ -78,6 +78,12 @@ export default class NowPlayingCommand extends Command {
 
                 if(i.customId === 'pause') {
                     await i.deferReply({ ephemeral: true });
+                    // @ts-ignore
+                    if(!i.member.voice.channel || !i.member.voice.channel.id === queue.vc.id)
+                        await i.editReply({
+                            content: `Ты не в голосовом канале, либо тот канал, в котором ты находишься не является ключевым для проигрывания`
+                        });
+                    else
                     switch (queue.player.paused) {
                         case true: {
                             queue.player.setPaused(false);
@@ -103,8 +109,8 @@ export default class NowPlayingCommand extends Command {
                                             .setStyle('SECONDARY')
                                     ]
                                 )
-                            i.update({ components: [row] });
-                            i.editReply({ content: 'Очередь сервера была возобновлена' });
+                            await i.update({components: [row]});
+                            await i.editReply({ content: 'Очередь сервера была возобновлена' });
                         }
                         break;
                         case false: {
