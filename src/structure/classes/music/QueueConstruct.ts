@@ -48,6 +48,7 @@ export default class QueueConstruct implements QueueConstructInterface {
         this.player.on('end', async reason => {
             if(reason.reason === 'LOAD_FAILED') {
                 this.player.stopTrack();
+                this.tracks.shift();
                 return this.tc.send({ content: `Произошла ошибка, при попытке проиграть трек \`${this.tracks[0].info.title}\`, по этому я его пропустил` });
             }
 
