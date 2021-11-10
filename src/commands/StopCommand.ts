@@ -18,8 +18,8 @@ export default class StopCommand extends Command {
         // @ts-ignore
         if(!interaction.member.voice.channel || !interaction.member.voice.channel.id === queue.vc.id)
             return interaction.reply({ content: `Ты не в голосовом канале, либо тот канал, в котором ты находишься не является ключевым для проигрывания`, ephemeral: true });
-        queue.player.stopTrack();
+        queue.player.connection.disconnect();
         client.music.queue.delete(interaction.guildId);
-        return interaction.reply({ content: 'Очередь сервера была остановлена' })
+        return interaction.reply({ content: 'Очередь сервера была остановлена' });
     }
 }
